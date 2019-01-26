@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//Klasa przechowuje obserwatorów oraz notyfikuje ich
 public class TaskNotifierService implements TaskNotifier {
     private List<Observer> observers = new ArrayList<>();
 

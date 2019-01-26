@@ -4,6 +4,7 @@ import notification.NotificationDTO;
 
 import java.util.List;
 
+//Implementacja strategii sortowania - sortowanie malejąco według daty notyfikacji
 public class NotificationSortDescStrategy implements NotificationSortStrategy{
     @Override
     public List<NotificationDTO> sort(List<NotificationDTO> notifications) {

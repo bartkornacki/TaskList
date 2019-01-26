@@ -1,6 +1,6 @@
 package notification;
 
-//Subject
+//Subject - Implementacje tej klasy będą notyfikować obserwatorów
 public interface TaskNotifier {
 
     void registerObserver(Observer o);

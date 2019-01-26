@@ -91,27 +91,16 @@ public class Main {
             e.printStackTrace();
         }*/
 
-       /* NotificationSortStrategy ascSort = new NotificationSortASCStrategy();
-        List<NotificationDTO> sortedList = ascSort.sort(technican1.getNotification());
-        technican1.setNotification(sortedList);*/
-
+        //Pobranie strategii sortowania na podstawie typu sortowania
         NotificationSortStrategy strategy =
                 notificationSortStrategyFactory
                         .getStrategy(NotificationSortStrategyType.ASCENDING);
+
+        //Użycie algorytmu sortowania z pobranej strategii
         List<NotificationDTO> sortedList =
                 strategy.sort(technican1.getNotification());
+
         technican1.setNotification(sortedList);
-
-
-        Map<String, Employee> employeeMap = new HashMap<>();
-        employeeMap.put(technican1.getExternalId(), technican1);
-
-        System.out.println(employeeMap.get(technican1.getExternalId()));
-
-
-
-
-        System.out.println(employeeMap.get(technican1.getExternalId()));
 
 
 
