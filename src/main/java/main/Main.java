@@ -4,16 +4,26 @@ import employee.Employee;
 import employee.EmployeeFactory;
 import employee.EmployeeType;
 import location.LocationRepository;
+import notification.NotificationDTO;
 import notification.TaskNotifierService;
 import notification.TaskNotifier;
+import notification.strategy.NotificationSortASCStrategy;
+import notification.strategy.NotificationSortStrategy;
+import notification.strategy.NotificationSortStrategyFactory;
+import notification.strategy.NotificationSortStrategyType;
 import task.model.Priority;
 import task.model.Status;
 import task.model.Task;
 
+import java.util.*;
+
+import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws OperationNotSupportedException {
         EmployeeFactory employeeFactory = new EmployeeFactory();
 
         LocationRepository locationRepository = LocationRepository.getInstance();
@@ -53,15 +63,55 @@ public class Main {
         technican1.printNotification();
 
         task2.setAssignedUserExternalId(technican1.getExternalId());
-
+        /*try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         Task task3 = new Task.TaskBuilder(2,"Instalacja")
                 .withDescription("Sprawdzenie uprawnień")
                 .withLocation((locationRepository.findById(3)))
                 .withCreateUserExternalId(dispatcher.getExternalId())
                 .build();
 
+        notifierService.notifyObservers();
+
+        System.out.println("After second task created");
+        technican1.printNotification();
+
+        NotificationSortStrategyFactory notificationSortStrategyFactory = new NotificationSortStrategyFactory();
+
+        /*try {
+            technican1.setNotification(notificationSortStrategyFactory
+                    .getStrategy(NotificationSortStrategyType.DESCENDING)
+                    .sort(technican1.getNotification()));
+
+            technican1.printNotification();
+        } catch (OperationNotSupportedException e) {
+            e.printStackTrace();
+        }*/
+
+       /* NotificationSortStrategy ascSort = new NotificationSortASCStrategy();
+        List<NotificationDTO> sortedList = ascSort.sort(technican1.getNotification());
+        technican1.setNotification(sortedList);*/
+
+        NotificationSortStrategy strategy =
+                notificationSortStrategyFactory
+                        .getStrategy(NotificationSortStrategyType.ASCENDING);
+        List<NotificationDTO> sortedList =
+                strategy.sort(technican1.getNotification());
+        technican1.setNotification(sortedList);
 
 
+        Map<String, Employee> employeeMap = new HashMap<>();
+        employeeMap.put(technican1.getExternalId(), technican1);
+
+        System.out.println(employeeMap.get(technican1.getExternalId()));
+
+
+
+
+        System.out.println(employeeMap.get(technican1.getExternalId()));
 
 
 

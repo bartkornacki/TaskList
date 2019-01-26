@@ -1,5 +1,6 @@
 package employee;
 
+import notification.NotificationDTO;
 import notification.Observer;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 public abstract class Employee implements Observer {
     private int id;
     private String fullName;
-    private String externalId;
+    private final String externalId;
     private EmployeeType employeeType;
     protected List<NotificationDTO> notification;
 
@@ -18,6 +19,14 @@ public abstract class Employee implements Observer {
         this.externalId = externalId;
         this.employeeType = employeeType;
         notification = new ArrayList<>();
+    }
+
+    public List<NotificationDTO> getNotification() {
+        return notification;
+    }
+
+    public void setNotification(List<NotificationDTO> notification) {
+        this.notification = notification;
     }
 
     public int getId() {
@@ -44,9 +53,6 @@ public abstract class Employee implements Observer {
         this.fullName = fullName;
     }
 
-    public void setExternalId(String externalId) {
-        this.externalId = externalId;
-    }
 
     public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;

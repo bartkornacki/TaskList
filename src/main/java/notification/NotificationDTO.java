@@ -1,4 +1,4 @@
-package employee;
+package notification;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
