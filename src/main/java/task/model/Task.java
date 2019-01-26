@@ -5,8 +5,6 @@ import location.model.Location;
 import java.time.LocalDate;
 import java.util.List;
 
-
-
 public class Task {
 
     public Task(int id, String title, String description, String summary, Status status, boolean done, LocalDate createDate, LocalDate dueDate, List<Skill> requiredSkills, Priority priority, Location location, String createUserExternalId, String assignedUserExternalId) {
@@ -162,18 +160,20 @@ public class Task {
         private String createUserExternalId;
         private String assignedUserExternalId;
 
-        public TaskBuilder() {
-        }
-
-        public TaskBuilder withId(int id) {
+        public TaskBuilder(int id, String title) {
             this.id = id;
-            return this;
+            this.title = title;
         }
 
-        public TaskBuilder withTitle(String title) {
-            this.title = title;
-            return  this;
-        }
+//        public TaskBuilder withId(int id) {
+//            this.id = id;
+//            return this;
+//        }
+//
+//        public TaskBuilder withTitle(String title) {
+//            this.title = title;
+//            return  this;
+//        }
 
         public TaskBuilder withDescription(String description) {
             this.description = description;
@@ -216,12 +216,13 @@ public class Task {
             this.createUserExternalId = createUserExternalId;
             return this;
         }
+
         public TaskBuilder withAssignedUserExternalId (String assignedUserExternalId){
             this.assignedUserExternalId = assignedUserExternalId;
             return this;
         }
 
-        public Task build (){
+        public Task build () {
             Task task = new Task();
             task.id = this.id;
             task.title = this.title;
@@ -237,7 +238,7 @@ public class Task {
             task.requiredSkills = this.requiredSkills;
             task.status = this.status;
             return task;
-            
+
         }
 
     }
