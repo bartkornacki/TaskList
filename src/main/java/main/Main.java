@@ -3,11 +3,10 @@ package main;
 import employee.Employee;
 import employee.EmployeeFactory;
 import employee.EmployeeType;
-import employee.Technican;
 import location.LocationRepository;
-import location.model.Location;
+import notification.TaskNotifierService;
+import notification.TaskNotifier;
 import task.model.Priority;
-import task.model.Skill;
 import task.model.Status;
 import task.model.Task;
 
@@ -18,6 +17,8 @@ public class Main {
         EmployeeFactory employeeFactory = new EmployeeFactory();
 
         LocationRepository locationRepository = LocationRepository.getInstance();
+        TaskNotifier notifierService = new TaskNotifierService();
+
 
         Employee technican1 = employeeFactory.create(EmployeeType.TECHNICAN,1,"Jan Kowalski"
                ,"1234");
@@ -29,6 +30,13 @@ public class Main {
                 "Krystyna Nowak"
                 ,"15999");
 
+        notifierService.registerObserver(technican1);
+        notifierService.registerObserver(technican2);
+
+
+        technican1.printNotification();
+
+
         Task task2 = new Task.TaskBuilder(1,"Naprawa Usterki")
                 .withDueDate(LocalDate.now().plusDays(5))
                 .withPriority(Priority.MEDIUM)
@@ -37,6 +45,12 @@ public class Main {
                 .withStatus(Status.OPEN)
                 .withCreateUserExternalId(dispatcher.getExternalId())
                 .build();
+
+        notifierService.notifyObservers();
+
+
+        System.out.println("After task created");
+        technican1.printNotification();
 
         task2.setAssignedUserExternalId(technican1.getExternalId());
 

@@ -1,17 +1,23 @@
 package employee;
 
-public abstract class Employee {
+import notification.Observer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Employee implements Observer {
     private int id;
     private String fullName;
     private String externalId;
-
     private EmployeeType employeeType;
+    protected List<NotificationDTO> notification;
 
     public Employee(int id, String fullName, String externalId, EmployeeType employeeType) {
         this.id = id;
         this.fullName = fullName;
         this.externalId = externalId;
         this.employeeType = employeeType;
+        notification = new ArrayList<>();
     }
 
     public int getId() {
@@ -44,6 +50,10 @@ public abstract class Employee {
 
     public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;
+    }
+
+    public void printNotification(){
+        notification.forEach(s -> System.out.println(s));
     }
 
 }
