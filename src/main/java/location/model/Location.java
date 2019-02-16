@@ -1,13 +1,16 @@
 package location.model;
 
 public class Location {
+
+    private static int counter = 1;
     private int id;
     private String city;
     private String postalCode;
     private String street;
     private String streetNo;
 
-    public Location(int id, String city, String postalCode, String street, String streetNo) {
+    public Location(String city, String postalCode, String street, String streetNo) {
+        this.id = counter++;
         this.id = id;
         this.city = city;
         this.postalCode = postalCode;
@@ -17,10 +20,6 @@ public class Location {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCity() {
