@@ -49,7 +49,7 @@ public class LocationDAO {
         if (instance == null){
             synchronized (LocationDAO.class){
                 if(instance == null){
-                    return new LocationDAO();
+                    instance = new LocationDAO();
                 }
             }
         }
