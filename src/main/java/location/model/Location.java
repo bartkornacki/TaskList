@@ -3,7 +3,7 @@ package location.model;
 public class Location {
 
     private static int counter = 1;
-    private int id;
+    private final int id;
     private String city;
     private String postalCode;
     private String street;
@@ -11,7 +11,6 @@ public class Location {
 
     public Location(String city, String postalCode, String street, String streetNo) {
         this.id = counter++;
-        this.id = id;
         this.city = city;
         this.postalCode = postalCode;
         this.street = street;

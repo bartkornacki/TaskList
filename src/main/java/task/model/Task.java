@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Task {
     private static int counter = 1;
-    private int id;
+    private final int id;
     private String title;
     private String description;
     private String summary;
@@ -136,4 +136,106 @@ public class Task {
     public void setAssignedUserExternalId(String assignedUserExternalId) {
         this.assignedUserExternalId = assignedUserExternalId;
     }
+
+    public Task() {
+        this.id = counter++;
+
+    }
+
+    public static class TaskBuilder {
+        private String title;
+        private String description;
+        private String summary;
+        private Status status;
+        private boolean done;
+        private LocalDate createDate;
+        private LocalDate dueDate;
+        private List<Skill> requiredSkills;
+        private Priority priority;
+        private Location location;
+        private String createUserExternalId;
+        private String assignedUserExternalId;
+
+        public TaskBuilder(String title) {
+            this.title = title;
+        }
+
+//        public TaskBuilder withTitle(String title) {
+//            this.title = title;
+//            return this;
+//        }
+
+        public TaskBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public TaskBuilder withSummary(String summary) {
+            this.summary = summary;
+            return this;
+        }
+
+        public TaskBuilder withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public TaskBuilder withDone(boolean done) {
+            this.done = done;
+            return this;
+        }
+
+        public TaskBuilder withCreateDate(LocalDate createDate) {
+            this.createDate = createDate;
+            return this;
+        }
+
+        public TaskBuilder withDueDate(LocalDate dueDate) {
+            this.dueDate = dueDate;
+            return this;
+        }
+
+        public TaskBuilder withRequiredSkills(List<Skill> requiredSkills) {
+            this.requiredSkills = requiredSkills;
+            return this;
+        }
+
+        public TaskBuilder withPriority(Priority priority) {
+            this.priority = priority;
+            return this;
+        }
+
+        public TaskBuilder withLocation(Location location) {
+            this.location = location;
+            return this;
+        }
+
+        public TaskBuilder withCreateUserExternalId(String createUserExternalId) {
+            this.createUserExternalId = createUserExternalId;
+            return this;
+        }
+
+        public TaskBuilder withAssignedUserExternalId(String userExternalId) {
+            this.assignedUserExternalId = assignedUserExternalId;
+            return this;
+        }
+        public Task build(){
+            Task task = new Task();
+            task.setTitle(this.title);
+            task.setDescription(this.description);
+            task.setSummary(this.summary);
+            task.setStatus(this.status);
+            task.setDone(this.done);
+            task.setCreateDate(this.createDate);
+            task.setDueDate(this.dueDate);
+            task.setRequiredSkills(this.requiredSkills);
+            task.setPriority(this.priority);
+            task.setLocation(this.location);
+            task.setCreateUserExternalId(this.createUserExternalId);
+            task.setAssignedUserExternalId(this.assignedUserExternalId);
+
+            return task;
+        }
+    }
 }
+
